@@ -1,0 +1,10 @@
+.DS_Store
+*.psd
+site data.md
+.netlify/
+node_modules/
+.env
+.env.*
+*.log
+.vscode/
+.idea/

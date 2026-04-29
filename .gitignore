@@ -8,3 +8,9 @@ node_modules/
 *.log
 .vscode/
 .idea/
+.claude/
+
+# local build helpers (dev-only)
+_build_inline.py
+_template.html
+_tmp_*.svg

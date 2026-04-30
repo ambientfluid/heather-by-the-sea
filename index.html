@@ -73,7 +73,7 @@
   <link rel="apple-touch-icon" href="logo/favicon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
@@ -165,14 +165,21 @@ p:last-child{margin-bottom:0}
 .wave-divider--bottom{bottom:-1px}
 .wave-divider svg{width:100%;height:clamp(70px,9vw,140px);display:block}
 .wave-divider .wave{transform-origin:center}
-.wave-divider .wave-1{fill:url(#heroWaveDeep);animation:waveShift 18s ease-in-out infinite}
-.wave-divider .wave-2{fill:url(#heroWaveMid);animation:waveShift 13s ease-in-out infinite reverse}
-.wave-divider .wave-3{fill:#fff;animation:waveShift 9s ease-in-out infinite}
-.wave-divider .wave-crest{fill:none;stroke:rgba(255,255,255,.55);stroke-width:1.4;animation:waveShift 13s ease-in-out infinite reverse;opacity:.7}
-.wave-divider .wave-glimmer{fill:rgba(255,255,255,.35);animation:waveShift 7s ease-in-out infinite}
+.wave-divider .wave-1{fill:url(#heroWaveDeep);animation:waveSwell 14s ease-in-out infinite}
+.wave-divider .wave-2{fill:url(#heroWaveMid);animation:waveShift 11s ease-in-out infinite reverse}
+.wave-divider .wave-3{fill:#fff;animation:waveBob 8s ease-in-out infinite}
+.wave-divider .wave-crest{fill:none;stroke:rgba(255,255,255,.55);stroke-width:1.4;animation:waveShift 11s ease-in-out infinite reverse;opacity:.7}
+.wave-divider .wave-glimmer{fill:rgba(255,255,255,.35);animation:glimmerPulse 4.5s ease-in-out infinite;transform-origin:center}
+.wave-divider .wave-glimmer:nth-of-type(2){animation-duration:3.6s;animation-delay:.4s}
+.wave-divider .wave-glimmer:nth-of-type(3){animation-duration:5.2s;animation-delay:.9s}
+.wave-divider .wave-glimmer:nth-of-type(4){animation-duration:4.1s;animation-delay:1.5s}
+.wave-divider .wave-glimmer:nth-of-type(5){animation-duration:5.8s;animation-delay:2s}
 .wave-divider.soft .wave-1{fill:rgba(247,241,232,.55)}
 .wave-divider.soft .wave-2{fill:var(--sand)}
-@keyframes waveShift{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-30px) scaleY(1.04)}}
+@keyframes waveShift{0%,100%{transform:translate3d(0,0,0) scaleY(1)}25%{transform:translate3d(-10px,-4px,0) scaleY(1.05)}50%{transform:translate3d(-30px,3px,0) scaleY(1.09)}75%{transform:translate3d(-18px,-2px,0) scaleY(1.05)}}
+@keyframes waveBob{0%,100%{transform:translate3d(0,0,0) scaleY(1)}33%{transform:translate3d(14px,-5px,0) scaleY(1.06)}66%{transform:translate3d(22px,3px,0) scaleY(1.02)}}
+@keyframes waveSwell{0%,100%{transform:translate3d(0,0,0) scaleY(1)}50%{transform:translate3d(-8px,-6px,0) scaleY(1.12)}}
+@keyframes glimmerPulse{0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.3}50%{transform:translate3d(-12px,-4px,0) scale(1.6);opacity:1}}
 .about{background:#fff}
 .about-grid{display:grid;gap:clamp(40px,6vw,90px);grid-template-columns:1.1fr 1fr;align-items:center}
 .about-text h2{font-size:clamp(1.8rem,3vw,2.6rem)}
@@ -186,7 +193,7 @@ p:last-child{margin-bottom:0}
 .about-img:hover img{transform:scale(1.02)}
 .about-img-accent{position:absolute;inset:-22px -22px auto auto;width:70%;height:70%;border-radius:var(--radius-lg);background:linear-gradient(135deg,var(--aqua),var(--blue));opacity:.25;filter:blur(2px);z-index:1;animation:float 8s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(-8px,12px) rotate(-2deg)}}
-.services{background:linear-gradient(180deg,var(--sand-soft) 0%,var(--sand) 100%)}
+.services{background:url('images/beach-bg.jpg') center/100% 100% no-repeat}
 .service-grid{display:grid;column-gap:clamp(20px,2.5vw,32px);row-gap:6px;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto auto auto}
 .service-card{display:grid;grid-row:span 4;grid-template-rows:subgrid;background:#fff;border-radius:var(--radius);padding:clamp(22px,2.4vw,32px);border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease);position:relative;overflow:hidden;text-align:center}
 .service-card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(79,202,217,.08),rgba(9,161,247,.06));opacity:0;transition:opacity .4s var(--ease)}
@@ -201,8 +208,12 @@ p:last-child{margin-bottom:0}
 .service-card h3{margin:0}
 .gallery{background:#fff}
 .masonry{column-count:3;column-gap:16px}
-.masonry-item{display:block;width:100%;margin:0 0 16px;border:0;padding:0;border-radius:var(--radius);overflow:hidden;break-inside:avoid;box-shadow:var(--shadow-sm);cursor:pointer;position:relative;background:transparent;transition:transform .5s var(--ease),box-shadow .5s var(--ease);opacity:0;transform:translateY(20px)}
-.masonry-item.in{opacity:1;transform:none}
+.masonry-item{display:block;width:100%;margin:0 0 16px;border:0;padding:0;border-radius:var(--radius);overflow:hidden;break-inside:avoid;box-shadow:var(--shadow-sm);cursor:pointer;position:relative;background:transparent;--enter-rot:-3deg;--enter-y:55px;--enter-scale:.88;opacity:0;transform:translate3d(0,var(--enter-y),0) scale(var(--enter-scale)) rotate(var(--enter-rot));filter:blur(8px) saturate(.7);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.34,1.45,.64,1),filter .85s cubic-bezier(.22,1,.36,1),box-shadow .5s var(--ease)}
+.masonry-item:nth-child(2n){--enter-rot:3deg;--enter-y:75px;--enter-scale:.85}
+.masonry-item:nth-child(3n){--enter-rot:-2deg;--enter-y:40px;--enter-scale:.9}
+.masonry-item:nth-child(5n){--enter-rot:4deg;--enter-y:65px;--enter-scale:.86}
+.masonry-item:nth-child(7n){--enter-rot:-4deg;--enter-y:90px;--enter-scale:.82}
+.masonry-item.in{opacity:1;transform:translate3d(0,0,0) scale(1) rotate(0);filter:blur(0) saturate(1)}
 .masonry-item img{width:100%;height:auto;display:block;border-radius:var(--radius);transition:transform .8s var(--ease),filter .4s var(--ease)}
 .masonry-item::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,74,89,.45));opacity:0;transition:opacity .35s var(--ease)}
 .masonry-item .zoom-icon{position:absolute;bottom:14px;right:14px;width:38px;height:38px;display:grid;place-items:center;background:rgba(255,255,255,.92);color:var(--ocean);border-radius:999px;opacity:0;transform:translateY(8px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
@@ -375,7 +386,6 @@ p:last-child{margin-bottom:0}
           </article>
         </div>
       </div>
-      <div class="wave-divider wave-divider--bottom soft" aria-hidden="true"><svg viewBox="0 0 1440 100" preserveAspectRatio="none"><path class="wave wave-1" d="M0,60 C360,100 720,20 1080,60 C1260,80 1380,50 1440,60 L1440,100 L0,100 Z"></path><path class="wave wave-2" d="M0,70 C360,110 720,30 1080,70 C1260,90 1380,60 1440,70 L1440,100 L0,100 Z"></path></svg></div>
     </section>
 
     <section class="section gallery" id="gallery">
